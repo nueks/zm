@@ -1,5 +1,8 @@
 # zm
 
+this code is from
+- https://github.com/mattmc3/zsh_unplugged
+- https://github.com/zap-zsh/zap
 
 ## test command
 ```shell

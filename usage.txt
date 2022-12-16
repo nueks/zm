@@ -1,0 +1,9 @@
+zm [COMMANDS]
+
+COMMANDS:
+    help        help
+    list        list plugins
+    update      update plugins
+    compile     compile plugins
+    clean       clean plugins
+    info        git logs for zm

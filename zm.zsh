@@ -1,28 +1,8 @@
-# forked from 
-# - https://github.com/mattmc3/zsh_unplugged
-# - https://github.com/zap-zsh/zap
-#
-# add 'zm.load romkatv/zsh-defer' first for faster plugin loading
-#
-# example for ohmyzsh
-# zm.clone ohmyzsh/ohmyzsh
-# zm.source ohmyzsh/ohmyzsh/plugins/magic-enter
-# zm.source ohmyzsh/ohmyzsh/plugins/history-substring-search
-export ZM_DIR="$HOME/.local/share/zm"
-export ZM_PLUGIN_DIR="$ZM_DIR/plugins"
+export ZM_HOME=${ZM_HOME:-"$HOME/.local/share/zm"}
+export ZM_PLUGIN_DIR="$ZM_HOME/plugins"
 
 _help() {
-    cat <<-EOF
-zm [COMMANDS]
-
-COMMANDS:
-    help        help
-    list        list plugins
-    update      update plugins
-    compile     compile plugins
-    clean       clean plugins
-    info        git logs for zm
-EOF
+    cat $ZM_HOME/usage.txt
 }
 
 zm.load() {
@@ -30,16 +10,6 @@ zm.load() {
     init=$2
     zm.clone $plugin
     zm.source $plugin $init
-    # plugindir=$ZM_PLUGIN_DIR/${plugin}
-    # initfile=$plugindir/${plugin:t}.plugin.zsh
-
-    # if [[ ! -e $initfile ]]; then
-    #     local -a initfiles=($plugindir/*.plugin.{z,}sh(N) $plugindir/*.{z,}sh{-theme,}(N))
-    #     (( $#initfiles )) || { echo >&2 "No init file found '$plugin'." && return }
-    #     ln -sf "${initfiles[1]}" "$initfile"
-    # fi
-    # fpath+=$plugindir
-    # (( $+functions[zsh-defer] )) && zsh-defer . $initfile || . $initfile
 }
 
 zm.clone() {
@@ -71,7 +41,7 @@ zm.source() {
 
 _list() {
     echo "Installed Plugins"
-    for d in $ZM_PLUGIN_DIR/**/.git; do        
+    for d in $ZM_PLUGIN_DIR/**/.git; do
         echo " - ${d:h:t}"
     done 2>& /dev/null
 }
@@ -98,7 +68,7 @@ _clean_all() {
 
 _info() {
     # GIT_DIR="$ZM_DIR/.git"
-    git --no-pager -C $ZM_DIR log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+    git --no-pager -C $ZM_HOME log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 }
 
 typeset -A opts
