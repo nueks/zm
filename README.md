@@ -22,17 +22,25 @@ zm.load romkatv/zsh-defer
 ## test command
 ```shell
 $ docker run -it --rm --name zm -w /root \
-  -v $(pwd)/sample/zshrc:/root/.zshrc archlinux \
-  sh -c "pacman -Sy --noconfirm zsh git vim; exec zsh"
+  -v $(pwd)/sample/zshrc:/root/.zshrc \
+  archlinux sh -c "pacman -Sy --noconfirm zsh git vim; exec zsh"
 ```
 
+or
+
+```shell
+$ docker run -it --rm --name zm -w /root \
+  -v $(pwd)/sample/zshrc:/root/.zshrc \
+  -v $(pwd):/root/.local/share/zm \
+  archlinux sh -c "pacman -Sy --noconfirm zsh git vim; exec zsh"
+```
 
 or
 
 ```shell
 $ docker run -d --rm --name zm -w /root \
-  -v $(pwd)/sample/zshrc:/root/.zshrc archlinux \
-  sh -c "pacman -Sy --noconfirm zsh git vim; sleep inf"
+  -v $(pwd)/sample/zshrc:/root/.zshrc \
+  archlinux sh -c "pacman -Sy --noconfirm zsh git vim; sleep inf"
 ```
 
 ```shell

@@ -7,9 +7,10 @@ source ${ZM_HOME}/zm.zsh 2> /dev/null || {
 }
 zm.load romkatv/zsh-defer
 
-zm.load ohmyzsh/ohmyzsh plugins/magic-enter
-zm.load ohmyzsh/ohmyzsh plugins/histroy-substring-search
+zm.load ohmyzsh/ohmyzsh plugins/magic-enter/
+zm.load ohmyzsh/ohmyzsh plugins/history-substring-search
 zm.load ohmyzsh/ohmyzsh plugins/z
+zm.load ohmyzsh/ohmyzsh plugins/zoxide/zoxide.plugin.zsh
 
 zm.load zpm-zsh/colorize
 zm.load zsh-users/zsh-completions

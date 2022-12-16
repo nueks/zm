@@ -24,12 +24,25 @@ zm.clone() {
 zm.source() {
     plugin=$1
     init=$2
-    if [[ ! -z init ]]; then
+    if [[ -z "$init" ]]; then
+		# no 'init'
         plugindir=$ZM_PLUGIN_DIR/${plugin:t}
+        initfile=$plugindir/${plugin:t}.plugin.zsh
     else
-        plugindir=$ZM_PLUGIN_DIR/${plugin:t}/$init
+        tmp=$ZM_PLUGIN_DIR/${plugin:t}/$init
+		if [[ -d $tmp ]]; then
+			# when 'init' is directory
+            plugindir=$tmp
+            initfile=$plugindir/${plugin:t}.plugin.zsh
+	    elif [[ -e $tmp ]]; then
+			# when 'init' is file
+			plugindir=$ZM_PLUGIN_DIR/${plugin:t}
+			initfile=$tmp
+		else
+			echo "No $init file found"
+			return
+		fi
     fi
-    initfile=$plugindir/${plugin:t}.plugin.zsh
     if [[ ! -e $initfile ]]; then
         local -a initfiles=($plugindir/*.plugin.{z,}sh(N) $plugindir/*.{z,}sh{-theme,}(N))
         (( $#initfiles )) || { echo >&2 "No init file found '$plugin'." && return }
