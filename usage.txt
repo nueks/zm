@@ -6,4 +6,5 @@ COMMANDS:
     update      update plugins
     compile     compile plugins
     clean       clean plugins
+    bench       bench loading time
     info        git logs for zm

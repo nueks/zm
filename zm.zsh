@@ -68,6 +68,10 @@ _clean_all() {
     rm -rf $ZM_PLUGIN_DIR
 }
 
+_bench() {
+    for i in $(seq 1 10); do time zsh -i -c exit; done
+}
+
 _info() {
     # GIT_DIR="$ZM_DIR/.git"
     git --no-pager -C $ZM_HOME log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
@@ -80,6 +84,7 @@ opts=(
     update "_update_all"
     compile "_compile_all"
     clean "_clean_all"
+    bench "_bench"
     info "_info"
 )
 
