@@ -74,7 +74,7 @@ _bench() {
 
 _info() {
     # GIT_DIR="$ZM_DIR/.git"
-    git --no-pager -C $ZM_HOME log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+    git --no-pager -C $ZM_HOME log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit -n5
 }
 
 typeset -A opts
