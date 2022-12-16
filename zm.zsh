@@ -27,8 +27,9 @@ EOF
 
 zm.load() {
     plugin=$1
+    init=$2
     zm.clone $plugin
-    zm.source $plugin
+    zm.source $plugin $init
     # plugindir=$ZM_PLUGIN_DIR/${plugin}
     # initfile=$plugindir/${plugin:t}.plugin.zsh
 
@@ -43,7 +44,7 @@ zm.load() {
 
 zm.clone() {
     plugin=$1
-    plugindir=$ZM_PLUGIN_DIR/${plugin}
+    plugindir=$ZM_PLUGIN_DIR/${plugin:t}
     if [[ ! -d $plugindir ]]; then
         echo "Cloning $plugin..."
         git clone -q --depth 1 --recursive --shallow-submodules https://github.com/$plugin $plugindir
@@ -52,7 +53,12 @@ zm.clone() {
 
 zm.source() {
     plugin=$1
-    plugindir=$ZM_PLUGIN_DIR/${plugin}
+    init=$2
+    if [[ ! -z init ]]; then
+        plugindir=$ZM_PLUGIN_DIR/${plugin:t}
+    else
+        plugindir=$ZM_PLUGIN_DIR/${plugin:t}/$init
+    fi
     initfile=$plugindir/${plugin:t}.plugin.zsh
     if [[ ! -e $initfile ]]; then
         local -a initfiles=($plugindir/*.plugin.{z,}sh(N) $plugindir/*.{z,}sh{-theme,}(N))
