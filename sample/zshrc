@@ -12,18 +12,12 @@ zm.load ohmyzsh/ohmyzsh plugins/histroy-substring-search
 zm.load ohmyzsh/ohmyzsh plugins/z
 
 zm.load zpm-zsh/colorize
+zm.load zsh-users/zsh-completions
+zm.load zsh-users/zsh-history-substring-search
+zm.load agkozak/zsh-z
 
 zm.load zpm-zsh/ls
 export TIME_STYLE=iso
-
-zm.load zsh-users/zsh-completions
-
-zm.load zsh-users/zsh-history-substring-search
-
-zm.load zsh-users/zsh-autosuggestions
-ZSH_AUTOSUGGEST_USE_ASYNC=true
-ZSH_AUTOSUGGEST_MANUAL_REBIND=1
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=250'
 
 zm.load zsh-users/zsh-syntax-highlighting
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
@@ -33,4 +27,7 @@ ZSH_HIGHLIGHT_STYLES[path]=none
 ZSH_HIGHLIGHT_STYLES[path_prefix]=none
 unset "FAST_HIGHLIGHT[chroma-awk]"
 
-zm.load agkozak/zsh-z
+zm.load zsh-users/zsh-autosuggestions
+ZSH_AUTOSUGGEST_USE_ASYNC=true
+ZSH_AUTOSUGGEST_MANUAL_REBIND=1
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=250'
