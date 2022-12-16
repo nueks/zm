@@ -21,26 +21,27 @@ zm.load romkatv/zsh-defer
 
 ## test command
 ```shell
-$ docker run -it --rm --name zm -w /root \
+$ docker run -it --rm --name zm \
   -v $(pwd)/sample/zshrc:/root/.zshrc \
-  archlinux sh -c "pacman -Sy --noconfirm zsh git vim; exec zsh"
+  zm.env
 ```
 
 or
 
 ```shell
-$ docker run -it --rm --name zm -w /root \
+$ docker run -it --rm --name zm \
   -v $(pwd)/sample/zshrc:/root/.zshrc \
   -v $(pwd):/root/.local/share/zm \
-  archlinux sh -c "pacman -Sy --noconfirm zsh git vim; exec zsh"
+  zm.env
 ```
+
 
 or
 
 ```shell
-$ docker run -d --rm --name zm -w /root \
+$ docker run -d --rm --name zm --init \
   -v $(pwd)/sample/zshrc:/root/.zshrc \
-  archlinux sh -c "pacman -Sy --noconfirm zsh git vim; sleep inf"
+  zm.env -c "sleep inf"
 ```
 
 ```shell
@@ -51,4 +52,8 @@ $ docker exec -it -w /root zm zsh
 ## loading time
 ```shell
 $ for i in $(seq 1 10); do time zsh -i -c exit; done
+```
+
+```shell
+$ zm bench
 ```
