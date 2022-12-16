@@ -28,21 +28,22 @@ EOF
 zm.load() {
     plugin=$1
     zm.clone $plugin
-    plugindir=$ZM_PLUGIN_DIR/${plugin:t}
-    initfile=$plugindir/${plugin:t}.plugin.zsh
+    zm.source $plugin
+    # plugindir=$ZM_PLUGIN_DIR/${plugin}
+    # initfile=$plugindir/${plugin:t}.plugin.zsh
 
-    if [[ ! -e $initfile ]]; then
-        local -a initfiles=($plugindir/*.plugin.{z,}sh(N) $plugindir/*.{z,}sh{-theme,}(N))
-        (( $#initfiles )) || { echo >&2 "No init file found '$plugin'." && return }
-        ln -sf "${initfiles[1]}" "$initfile"
-    fi
-    fpath+=$plugindir
-    (( $+functions[zsh-defer] )) && zsh-defer . $initfile || . $initfile
+    # if [[ ! -e $initfile ]]; then
+    #     local -a initfiles=($plugindir/*.plugin.{z,}sh(N) $plugindir/*.{z,}sh{-theme,}(N))
+    #     (( $#initfiles )) || { echo >&2 "No init file found '$plugin'." && return }
+    #     ln -sf "${initfiles[1]}" "$initfile"
+    # fi
+    # fpath+=$plugindir
+    # (( $+functions[zsh-defer] )) && zsh-defer . $initfile || . $initfile
 }
 
 zm.clone() {
     plugin=$1
-    plugindir=$ZM_PLUGIN_DIR/${plugin:t}
+    plugindir=$ZM_PLUGIN_DIR/${plugin}
     if [[ ! -d $plugindir ]]; then
         echo "Cloning $plugin..."
         git clone -q --depth 1 --recursive --shallow-submodules https://github.com/$plugin $plugindir
@@ -50,20 +51,13 @@ zm.clone() {
 }
 
 zm.source() {
-    echo "zm.source"
     plugin=$1
-    echo "plugin: $plugin"
     plugindir=$ZM_PLUGIN_DIR/${plugin}
-    echo "plugin dir: $plugindir"
     initfile=$plugindir/${plugin:t}.plugin.zsh
-    echo "initfile: $initfile"
     if [[ ! -e $initfile ]]; then
         local -a initfiles=($plugindir/*.plugin.{z,}sh(N) $plugindir/*.{z,}sh{-theme,}(N))
         (( $#initfiles )) || { echo >&2 "No init file found '$plugin'." && return }
         ln -sf "${initfiles[1]}" "$initfile"
-    else:
-        echo "not found $initfile"
-
     fi
     fpath+=$plugindir
     (( $+functions[zsh-defer] )) && zsh-defer . $initfile || . $initfile
@@ -71,13 +65,13 @@ zm.source() {
 
 _list() {
     echo "Installed Plugins"
-    for d in $ZM_PLUGIN_DIR/*/.git; do        
+    for d in $ZM_PLUGIN_DIR/**/.git; do        
         echo " - ${d:h:t}"
     done 2>& /dev/null
 }
 
 _update_all() {
-    for d in $ZM_PLUGIN_DIR/*/.git; do
+    for d in $ZM_PLUGIN_DIR/**/.git; do
         echo "Updating ${d:h:t}..."
         command git -C "${d:h}" pull --ff --recurse-submodules --depth 1 --rebase --autostash
     done
