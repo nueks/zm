@@ -2,7 +2,7 @@
 ZM_HOME=${HOME}/.local/share/zm
 source ${ZM_HOME}/zm.zsh 2> /dev/null || {
     mkdir -p $(dirname $ZM_HOME)
-    git clone https://github.com/nueks/zm $ZM_HOM
+    git clone https://github.com/nueks/zm $ZM_HOME
     source ${ZM_HOME}/zm.zsh
 }
 zm.load romkatv/zsh-defer

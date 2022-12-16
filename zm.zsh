@@ -47,6 +47,8 @@ _list() {
 }
 
 _update_all() {
+	echo "Updating zm..."
+	command git -C $ZM_HOME pull --ff --recurse-submodules --depth 1 --rebase --autostash
     for d in $ZM_PLUGIN_DIR/**/.git; do
         echo "Updating ${d:h:t}..."
         command git -C "${d:h}" pull --ff --recurse-submodules --depth 1 --rebase --autostash
