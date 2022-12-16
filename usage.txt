@@ -1,4 +1,4 @@
-usage: zm [COMMANDS]
+USAGE: zm [COMMANDS]
 
 COMMANDS:
     help        print this message
