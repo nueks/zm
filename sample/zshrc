@@ -1,0 +1,17 @@
+ZM_HOME=${HOME}/.local/share/zm
+source ${ZM_HOME}/zm.zsh 2> /dev/null || {
+    mkdir -p $(dirname $ZM_HOME)
+    git clone https://github.com/nueks/zm $ZM_HOME
+    source ${ZM_HOME}/zm.zsh
+}
+
+zm.load romkatv/zsh-defer
+zm.load mattmc3/zman
+
+zm.load ohmyzsh/ohmyzsh plugins/magic-enter
+zm.load ohmyzsh/ohmyzsh plugins/histroy-substring-search
+zm.load ohmyzsh/ohmyzsh plugins/z
+
+#zm.source ohmyzsh/ohmyzsh/plugins/magic-enter
+#zm.source ohmyzsh/ohmyzsh/plugins/history-substring-search
+#zm.source ohmyzsh/ohmyzsh/plugins/z
